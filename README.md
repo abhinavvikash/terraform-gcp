@@ -32,5 +32,5 @@ gcloud auth activate-service-account sa-demo-tf-sbx@playpen-742d6a.iam.gservicea
 Create VPC
 Create Firewall rules
 Create gcs_bucket
-Create Dataproc service account with roles
+Create service account with roles
 Create GKE
