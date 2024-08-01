@@ -26,3 +26,11 @@ Run the following `gcloud` command to authenticate your shell with the above ser
 
 ```sh
 gcloud auth activate-service-account sa-demo-tf-sbx@playpen-742d6a.iam.gserviceaccount.com --key-file=playpen-742d6a-54ad3e59243b.json --project=playpen-742d6a
+
+## The sequence of provisioning resource using terraform is as follows:
+
+Create VPC
+Create Firewall rules
+Create gcs_bucket
+Create Dataproc service account with roles
+Create GKE
