@@ -1,5 +1,5 @@
 provider "google" {
-  project = "playpen-742d6a"
+  project = "playpen-48aa0c"
   region  = "europe-west1"
   
 }
@@ -9,7 +9,7 @@ terraform {
     organization = "lbg-cloud-platform"
 
     workspaces {
-      name = "playpen-742d6a-gcp"
+      name = "playpen-48aa0c-gcp"
     }
     
   }

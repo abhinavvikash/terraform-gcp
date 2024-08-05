@@ -1,12 +1,12 @@
 provider "google" {
-  project = "playpen-742d6a"
+  project = "playpen-48aa0c"
   region  = "europe-west1"
   
 }
 
 terraform {
   backend "gcs" {
-  bucket = "playpen-742d6a-terraform-bucket"
+  bucket = "playpen-48aa0c-terraform-bucket"
   prefix = "terraform/state/vpc"
   }
 }

@@ -1,6 +1,6 @@
 variable project_id {
     type = string
-    default = "playpen-742d6a"
+    default = "playpen-48aa0c"
 }
 
 variable region {
@@ -10,10 +10,10 @@ variable region {
 
 variable bucket_name {
     type = string
-    default = "playpen-742d6a-dataproc-bucket"
+    default = "playpen-48aa0c-dataproc-bucket"
 }
 
 variable terraform_bucket_name {
     type = string
-    default = "playpen-742d6a-terraform-bucket"
+    default = "playpen-48aa0c-terraform-bucket"
 }

@@ -1,11 +1,11 @@
 variable vpc_name {
     type = string
-    default = "playpen-742d6a-vpc"
+    default = "playpen-48aa0c-vpc"
 }
 
 variable subnet_name {
     type = string
-    default = "playpen-742d6a-subnet"
+    default = "playpen-48aa0c-subnet"
 }
 
 variable region {
@@ -15,5 +15,5 @@ variable region {
 
 variable gke_subnet_name {
     type = string
-    default = "playpen-742d6a-subnet-gke"
+    default = "playpen-48aa0c-subnet-gke"
 }
