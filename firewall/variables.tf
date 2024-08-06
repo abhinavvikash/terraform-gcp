@@ -1,6 +1,6 @@
 variable vpc_name {
     type = string
-    default = "playpen-742d6a-vpc"
+    default = "playpen-48aa0c-vpc"
 }
 
 variable source_ranges {

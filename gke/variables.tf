@@ -11,17 +11,17 @@ variable region {
 
 variable project_id {
     type = string
-    default = "playpen-742d6a"
+    default = "playpen-48aa0c"
 }
 
 variable vpc_name {
     type = string
-    default = "playpen-742d6a-vpc"
+    default = "playpen-48aa0c-vpc"
 }
 
 variable subnet_name {
     type = string
-    default = "playpen-742d6a-subnet-gke"
+    default = "playpen-48aa0c-subnet-gke"
 }
 
 variable machine_type {

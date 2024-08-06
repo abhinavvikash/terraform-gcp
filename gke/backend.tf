@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-  bucket = "playpen-742d6a-terraform-bucket"
+  bucket = "playpen-48aa0c-terraform-bucket"
   prefix = "terraform/state/gke"
   
 }
