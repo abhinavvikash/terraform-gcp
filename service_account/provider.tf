@@ -1,5 +1,4 @@
 provider "google" {
-  project = "playpen-742d6a"
+  project = "playpen-48aa0c"
   region  = "europe-west1"
-  credentials = file("playpen-742d6a-54ad3e59243b.json")
 }

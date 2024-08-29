@@ -26,7 +26,7 @@ variable subnet_name {
 
 variable machine_type {
     type = string
-    default = "n1-standard-1"
+    default = "n1-standard-4"
 }
 
 variable master_authorized_networks_ips {

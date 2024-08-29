@@ -5,5 +5,10 @@ variable region {
 
 variable repository_name {
     type = string
-    default = "dm-docker-repo"
+    default = "main"
+}
+
+variable project_id {
+    type = string
+    default = "playpen-48aa0c"
 }

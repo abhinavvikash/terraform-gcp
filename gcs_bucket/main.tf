@@ -29,3 +29,10 @@ resource "google_storage_bucket" "terraform_bucket" {
   location = var.region
   force_destroy = true
 }
+
+resource "google_storage_bucket" "jar_bucket" {
+  project = var.project_id
+  name = var.jar_bucket_name
+  location = var.region
+  force_destroy = false
+}

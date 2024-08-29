@@ -1,7 +1,7 @@
 
 terraform {
   backend "gcs" {
-  bucket = "playpen-742d6a-terraform-bucket"
+  bucket = "playpen-48aa0c-terraform-bucket"
   prefix = "terraform/state/service_account"
   
 }
@@ -26,6 +26,27 @@ resource "google_project_iam_member" "dataproc_permissions" {
   role = each.key
   member = "serviceAccount:${google_service_account.dataproc-svc.email}"
 }
+
+#artifact registry service account
+resource "google_service_account" "artifact-svc" {
+  project      = var.project_id
+  account_id   = "artifact-svc"
+  display_name = "Service Account - artifact registry"
+}
+
+resource "google_project_iam_member" "registry_permissions" {
+  for_each = toset([
+    "roles/artifactregistry.admin",
+
+  ])
+  project = var.project_id
+  role = each.key
+  member = "serviceAccount:${google_service_account.artifact-svc.email}"
+}
+
+
+
+
 
 # kubernetes service account
 
