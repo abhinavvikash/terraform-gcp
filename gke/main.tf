@@ -1,8 +1,19 @@
 # GKE cluster
-# data "google_container_engine_versions" "gke_version" {
-#   location = var.region
-#   version_prefix = "1.29."
-# }
+data "google_container_engine_versions" "gke_version" {
+  location = var.region
+  version_prefix = "1.29"
+}
+
+resource "google_project_service" "gke" {
+  project = var.project_id
+  service = "container.googleapis.com"
+  disable_on_destroy = false
+}
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [google_project_service.gke]
+  create_duration = "300s"
+}
 
 data "google_client_config" "current" {}
 
@@ -18,6 +29,12 @@ resource "google_container_cluster" "primary" {
   deletion_protection = false
   network    = var.vpc_name
   subnetwork = var.subnet_name
+   addons_config {
+    gcs_fuse_csi_driver_config {
+      enabled = true
+    }
+  }
+  # enable_autopilot = true
   # node_config {
   #   tags = ["k8s-api"]
   # }
@@ -41,8 +58,11 @@ resource "google_container_cluster" "primary" {
   #   cidr_block = var.master_authorized_networks_ips
   #   display_name = "Allow all IPs"
   # }
+  #   cidr_blocks {
+  #     cidr_block = "148.64.29.0/24"
   # }
-
+  # }
+  depends_on = [google_project_service.gke,time_sleep.wait_30_seconds]
 }
 
 # Separately Managed Node Pool
@@ -66,8 +86,12 @@ resource "google_container_node_pool" "primary_nodes" {
     oauth_scopes = [
       "https://www.googleapis.com/auth/logging.write",
       "https://www.googleapis.com/auth/monitoring",
+      "https://www.googleapis.com/auth/cloud-platform",
+      "https://www.googleapis.com/auth/devstorage.read_only",
+      "https://www.googleapis.com/auth/service.management.readonly",
+      "https://www.googleapis.com/auth/servicecontrol"
     ]
-
+    service_account = "gke-cluster-access@playpen-e16de4.iam.gserviceaccount.com"
     labels = {
       env = var.project_id
     }
@@ -79,17 +103,4 @@ resource "google_container_node_pool" "primary_nodes" {
       disable-legacy-endpoints = "true"
     }
   }
-}
-
-
-provider "kubernetes" {
-  load_config_file = "false"
-
-  host = google_container_cluster.primary.endpoint
-#   username = var.gke_username
-#   password = var.gke_password
-
-  client_certificate     = google_container_cluster.primary.master_auth.0.client_certificate
-  client_key             = google_container_cluster.primary.master_auth.0.client_key
-  cluster_ca_certificate = google_container_cluster.primary.master_auth.0.cluster_ca_certificate
 }

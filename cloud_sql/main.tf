@@ -19,7 +19,7 @@ resource "google_project_service" "servicenetworking" {
 resource "time_sleep" "wait_30_seconds" {
   depends_on = [google_project_service.services, google_project_service.sql-component, google_project_service.servicenetworking]
 
-  create_duration = "30s"
+  create_duration = "100s"
 }
 
 resource "google_compute_global_address" "private_ip_address" {
@@ -32,7 +32,6 @@ resource "google_compute_global_address" "private_ip_address" {
 }
 
 resource "google_service_networking_connection" "private_vpc_connection" {
-#   provider = google-beta
   network = var.vpc_name
   service = "servicenetworking.googleapis.com"
   reserved_peering_ranges = [google_compute_global_address.private_ip_address.name]
@@ -43,7 +42,7 @@ resource "google_service_networking_connection" "private_vpc_connection" {
 resource "google_sql_database_instance" "primary" {
   name                = var.gcp_pg_name_primary
   database_version    = var.gcp_pg_database_version
-  region              = var.gcp_pg_region_primary
+  region              = var.region
   deletion_protection = false
 
   settings {
@@ -56,8 +55,16 @@ resource "google_sql_database_instance" "primary" {
     }
   }
 
-  depends_on = [google_project_service.services, time_sleep.wait_30_seconds]
+  depends_on = [google_project_service.services, 
+                time_sleep.wait_30_seconds,
+                google_service_networking_connection.private_vpc_connection]
 
+}
+
+resource "google_sql_user" "users" {
+  name     = var.username
+  instance = google_sql_database_instance.primary.name
+  password = var.password
 }
 
 output "instance_primary_ip_address" {

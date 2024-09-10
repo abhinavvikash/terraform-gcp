@@ -11,17 +11,17 @@ variable region {
 
 variable project_id {
     type = string
-    default = "playpen-48aa0c"
+    default = "playpen-e16de4"
 }
 
 variable vpc_name {
     type = string
-    default = "playpen-48aa0c-vpc"
+    default = "playpen-e16de4-vpc"
 }
 
 variable subnet_name {
     type = string
-    default = "playpen-48aa0c-subnet-gke"
+    default = "playpen-e16de4-subnet-gke"
 }
 
 variable machine_type {
@@ -31,6 +31,16 @@ variable machine_type {
 
 variable master_authorized_networks_ips {
     type = string
-    default = "148.64.28.25/32"
+    default = "148.64.30.0/24"
+}
+
+variable gke_username {
+    type = string
+    default = "admin"
+}
+
+variable gke_password {
+    type = string
+    default = "admin"
 }
  

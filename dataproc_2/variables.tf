@@ -46,12 +46,12 @@ variable "dataproc_name" {
 
 variable service_account_name {
   type = string
-  default = "dataproc-svc@playpen-48aa0c.iam.gserviceaccount.com"
+  default = "dataproc-svc@playpen-e16de4.iam.gserviceaccount.com"
 }
 
 variable bucket_name {
   type = string
-  default = "playpen-48aa0c-dataproc-bucket"
+  default = "playpen-e16de4-dataproc-bucket"
 }
 
 variable region {
@@ -61,10 +61,15 @@ variable region {
 
 variable subnet_name {
   type = string
-  default = "playpen-48aa0c-subnet"
+  default = "playpen-e16de4-subnet"
 }
 
 variable vpc_name {
   type = string
-  default = "playpen-48aa0c-vpc"
+  default = "playpen-e16de4-vpc"
+}
+
+variable project_id {
+  type = string
+  default = "playpen-e16de4"
 }

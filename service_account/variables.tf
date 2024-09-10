@@ -1,6 +1,6 @@
 variable project_id {
     type = string
-    default = "playpen-48aa0c"
+    default = "playpen-e16de4"
 }
 
 variable prefix {
@@ -15,6 +15,6 @@ variable region {
 
 variable bucket_name {
     type = string
-    default = "playpen-48aa0c-dataproc-bucket"
+    default = "playpen-e16de4-dataproc-bucket"
 }
 

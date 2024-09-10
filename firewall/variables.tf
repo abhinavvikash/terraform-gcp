@@ -1,9 +1,19 @@
 variable vpc_name {
     type = string
-    default = "playpen-48aa0c-vpc"
+    default = "playpen-e16de4-vpc"
 }
 
 variable source_ranges {
     type = list
     default = ["10.10.0.0/24"]
+}
+
+variable region {
+    type = string
+    default = "europe-west1"
+}
+
+variable project_id {
+    type = string
+    default = "playpen-e16de4"
 }

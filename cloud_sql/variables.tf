@@ -10,17 +10,15 @@ variable "gcp_pg_database_version" {
   default = "POSTGRES_15"
 }
 
-variable "gcp_pg_region_primary" {
+variable "region" {
   type    = string
   default = "europe-west1"
 }
 
-variable "project" {
-  description = "The project ID where all resources will be launched."
-  type        = string
-  default     = "playpen-48aa0c"
+variable "zone" {
+  type = string
+  default = "europe-west1-a"
 }
-
 
 variable "gcp_pg_tier" {
   type    = string
@@ -29,10 +27,20 @@ variable "gcp_pg_tier" {
 
 variable vpc_name {
     type = string
-    default = "playpen-48aa0c-vpc"
+    default = "playpen-e16de4-vpc"
 }
 
 variable project_id {
     type = string
-    default = "playpen-48aa0c"
+    default = "playpen-e16de4"
+}
+
+variable username {
+  type = string
+  default = "admin"
+}
+
+variable password {
+  type = string
+  default = "admin"
 }

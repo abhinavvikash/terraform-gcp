@@ -1,15 +1,3 @@
-provider "google" {
-  project = "playpen-48aa0c"
-  region  = "europe-west1"
-  
-}
-
-terraform {
-  backend "gcs" {
-  bucket = "playpen-48aa0c-terraform-bucket"
-  prefix = "terraform/state/vpc"
-  }
-}
 
 resource "google_compute_network" "vpc" {
   name                   = var.vpc_name
@@ -18,7 +6,7 @@ resource "google_compute_network" "vpc" {
 
 # dataproc Subnet
 resource "google_compute_subnetwork" "subnet_dataproc" {
-  name          = var.subnet_name
+  name          = var.dataproc_subnet_name
   region        = var.region
   network       = google_compute_network.vpc.name
   ip_cidr_range = "10.10.0.0/24"

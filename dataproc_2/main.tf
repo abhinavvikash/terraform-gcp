@@ -1,3 +1,14 @@
+resource "google_project_service" "dataproc" {
+  project = var.project_id
+  service = "dataproc.googleapis.com"
+  disable_on_destroy = false
+}
+
+resource "time_sleep" "wait_30_seconds" {
+  depends_on = [google_project_service.dataproc]
+  create_duration = "300s"
+}
+
 resource "google_dataproc_cluster" "dpcluster" {
   name                          = var.dataproc_name
   region                        = var.region
@@ -29,7 +40,11 @@ resource "google_dataproc_cluster" "dpcluster" {
     }
 
     software_config {
-      image_version = "2.0.66-debian10"
+      image_version = "2.2-debian12"
+      optional_components = ["JUPYTER"]
+      override_properties = {
+        "spark:spark.jars.packages" = "org.scala-lang:scala-library:2.13.14"
+      }
     }
 
     gce_cluster_config {
@@ -47,6 +62,7 @@ resource "google_dataproc_cluster" "dpcluster" {
       internal_ip_only = true
     }
   }
+  depends_on = [google_project_service.dataproc,time_sleep.wait_30_seconds]
   
 }
 
