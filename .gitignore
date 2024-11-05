@@ -22,8 +22,9 @@ gke/kubeconfig.yaml
 gke/playpen-e16de4-30d039fee422.json
 
 Public/
-
+helm-repo/
 scripts/
+managed_instance_template/
 
 service_account/.terraform
 service_account/.terraform.lock.hcl
@@ -34,7 +35,7 @@ virtual_machine/.terraform.lock.hcl
 vpc/.terraform
 vpc/.terraform.lock.hcl
 
-audit.dockerfile
+# audit.dockerfile
 
 
 

@@ -53,6 +53,10 @@ resource "google_sql_database_instance" "primary" {
       ipv4_enabled = false
       private_network = data.google_compute_network.vpc.id
     }
+    database_flags {
+      name  = "max_connections"
+      value = "200"
+    }
   }
 
   depends_on = [google_project_service.services, 

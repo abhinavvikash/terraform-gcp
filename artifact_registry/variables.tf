@@ -10,5 +10,5 @@ variable repository_name {
 
 variable project_id {
     type = string
-    default = "playpen-e16de4"
+    default = "playpen-795065"
 }

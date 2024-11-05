@@ -16,6 +16,12 @@ resource "google_project_iam_member" "dataproc_permissions" {
   project = var.project_id
   role = each.key
   member = "serviceAccount:${google_service_account.dataproc-svc.email}"
+  lifecycle {
+    ignore_changes = [
+      # List the attributes you want to ignore changes for
+      role
+    ]
+  }
 }
 
 # Artifact service account
@@ -31,48 +37,13 @@ resource "google_project_iam_binding" "artifact_registry_role" {
   members = [
     "serviceAccount:${google_service_account.artifact_registry_sa.email}"
   ]
+  lifecycle {
+    ignore_changes = [
+      # List the attributes you want to ignore changes for
+      role
+    ]
+  }
 }
-
-# kubernetes service account
-
-# resource "kubernetes_service_account" "ksa" {
-#   metadata {
-#     name      = "dataproc-ksa"
-#     namespace = "default"
-#     annotations = {
-#       "iam.gke.io/gcp-service-account" = "${google_service_account.dataproc-svc.email}"
-#     }
-#   }
-# }
-
-#binding of KSA to GSA
-
-# resource "google_service_account_iam_binding" "binding" {
-#   service_account_id = google_service_account.dataproc-svc.name
-
-#   role = "roles/iam.workloadIdentityUser"
-
-#   members = [
-#     "serviceAccount:${var.project_id}.svc.id.goog[default/dataproc-ksa]",
-#     "serviceAccount:${var.project_id}.svc.id.goog[default/agent]",
-#     "serviceAccount:${var.project_id}.svc.id.goog[default/spark-driver]",
-#     "serviceAccount:${var.project_id}.svc.id.goog[default/spark-executor]",
-#   ]
-# }
-
-#Annotate the KSA with the GSA
-
-# resource "kubernetes_service_account" "ksa" {
-#   metadata {
-#     name      = "dataproc-ksa"
-#     namespace = "default"
-#     annotations = {
-#       "iam.gke.io/gcp-service-account" = "${google_service_account.dataproc-svc.email}"
-#     }
-#   }
-# }
-
-# GKE service account
 
 resource "google_service_account" "gke_sa" {
   account_id   = "gke-cluster-access"
@@ -92,6 +63,12 @@ resource "google_project_iam_binding" "gke_role" {
   members = [
     "serviceAccount:${google_service_account.gke_sa.email}"
   ]
+  lifecycle {
+    ignore_changes = [
+      # List the attributes you want to ignore changes for
+      role
+    ]
+  }
 }
 
 resource "google_service_account_iam_binding" "workload_identity_binding" {
@@ -101,18 +78,13 @@ resource "google_service_account_iam_binding" "workload_identity_binding" {
   members = [
     "serviceAccount:${var.project_id}.svc.id.goog[default/foundation-component-service-account]"
   ]
+  lifecycle {
+  ignore_changes = [
+    # List the attributes you want to ignore changes for
+    role
+  ]
 }
-
-# resource "google_project_iam_binding" "user_impersonation" {
-#   project = var.project_id
-#   role = "roles/iam.serviceAccountUser"
-#   members = [
-#     "user:abhinav.vikash@lloydsbanking.dev",
-#     "user:madhbhavikar.prasad@lloydsbanking.dev",
-#     "user:arvind.ojha1@lloydsbanking.dev",
-#     "user:veeresh.hosur@lloydsbanking.dev"
-#   ]
-# }
+}
 
 
 #VM service account
@@ -126,10 +98,62 @@ resource "google_project_iam_member" "vm_service_account_roles" {
     "roles/compute.instanceAdmin.v1",
     "roles/iam.serviceAccountUser",
     "roles/storage.objectViewer",
-    "roles/cloudsql.client"
+    "roles/cloudsql.client",
+    "roles/compute.networkAdmin",
+    "roles/dataproc.editor",
+    "roles/storage.admin"
     // Add other roles as needed
   ])
   project = var.project_id
   member  = "serviceAccount:${google_service_account.vm_service_account.email}"
   role    = each.value
+  lifecycle {
+  ignore_changes = [
+    # List the attributes you want to ignore changes for
+    role
+  ]
+}
+}
+
+resource "google_service_account" "cloud_build" {
+  account_id   = "image-build-account"
+  display_name = "Gcloud Build"
+}
+
+resource "google_project_iam_member" "cloud_build_roles" {
+  for_each = toset([
+    "roles/storage.objectViewer",
+    "roles/logging.logWriter",
+    "roles/artifactregistry.writer"
+    // Add other roles as needed
+  ])
+  project = var.project_id
+  member  = "serviceAccount:${google_service_account.cloud_build.email}"
+  role    = each.value
+    lifecycle {
+    ignore_changes = [
+      # List the attributes you want to ignore changes for
+      role
+    ]
+  }
+}
+
+resource "google_service_account" "monitoring" {
+  account_id   = "monitoring-sa"
+  display_name = "Grafana Monitoring Service Account"
+}
+
+resource "google_project_iam_binding" "monitoring_role" {
+  project = var.project_id
+  role    = "roles/monitoring.viewer"
+
+  members = [
+    "serviceAccount:${google_service_account.monitoring.email}"
+  ]
+  lifecycle {
+    ignore_changes = [
+      # List the attributes you want to ignore changes for
+      role
+    ]
+  }
 }

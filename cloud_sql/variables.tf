@@ -27,12 +27,12 @@ variable "gcp_pg_tier" {
 
 variable vpc_name {
     type = string
-    default = "playpen-e16de4-vpc"
+    default = "playpen-795065-vpc"
 }
 
 variable project_id {
     type = string
-    default = "playpen-e16de4"
+    default = "playpen-795065"
 }
 
 variable username {

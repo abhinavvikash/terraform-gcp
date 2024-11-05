@@ -1,6 +1,6 @@
 terraform {
   backend "gcs" {
-  bucket = "playpen-e16de4-terraform-bucket"
+  bucket = "playpen-795065-terraform-bucket"
   prefix = "terraform/state/artifact_registry"  
 }
 }

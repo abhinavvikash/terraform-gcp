@@ -1,11 +1,11 @@
 variable vpc_name {
     type = string
-    default = "playpen-e16de4-vpc"
+    default = "playpen-795065-vpc"
 }
 
 variable dataproc_subnet_name {
     type = string
-    default = "playpen-e16de4-subnet"
+    default = "playpen-795065-subnet-dp"
 }
 
 variable region {
@@ -15,10 +15,10 @@ variable region {
 
 variable gke_subnet_name {
     type = string
-    default = "playpen-e16de4-subnet-gke"
+    default = "playpen-795065-subnet-gke"
 }
 
 variable project_id {
     type = string
-    default = "playpen-e16de4"
+    default = "playpen-795065"
 }

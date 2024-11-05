@@ -6,7 +6,7 @@ resource "google_project_service" "dataproc" {
 
 resource "time_sleep" "wait_30_seconds" {
   depends_on = [google_project_service.dataproc]
-  create_duration = "300s"
+  create_duration = "120s"
 }
 
 resource "google_dataproc_cluster" "dpcluster" {

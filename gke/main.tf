@@ -10,9 +10,10 @@ resource "google_project_service" "gke" {
   disable_on_destroy = false
 }
 
+
 resource "time_sleep" "wait_30_seconds" {
   depends_on = [google_project_service.gke]
-  create_duration = "300s"
+  create_duration = "120s"
 }
 
 data "google_client_config" "current" {}
@@ -91,7 +92,7 @@ resource "google_container_node_pool" "primary_nodes" {
       "https://www.googleapis.com/auth/service.management.readonly",
       "https://www.googleapis.com/auth/servicecontrol"
     ]
-    service_account = "gke-cluster-access@playpen-e16de4.iam.gserviceaccount.com"
+    service_account = "gke-cluster-access@playpen-795065.iam.gserviceaccount.com"
     labels = {
       env = var.project_id
     }
