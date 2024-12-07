@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: foundation-component-audit
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: foundation-component-audit
+  template:
+    metadata:
+      labels:
+        app: foundation-component-audit
+    spec:
+      containers:
+      - name: foundation-component-audit
+        image: europe-west1-docker.pkg.dev/playpen-795065/main/foundation-component-audit:v1.0.3
+        envFrom:
+        - configMapRef:
+            name: foundation-component-audit-config
+        ports:
+        - containerPort: 10003

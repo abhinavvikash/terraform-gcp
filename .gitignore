@@ -45,6 +45,7 @@ vpc/.terraform.lock.hcl
  gcs_bucket/terraform.tfstate.backup
  infra_map/ 
  prometheus.yml
+ manifest_files/K8s/foundation-component-audit/playpen-795065-bf04d91db07b.json
 
 
 
