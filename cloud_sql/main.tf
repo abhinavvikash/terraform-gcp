@@ -61,9 +61,36 @@ resource "google_sql_database_instance" "primary" {
 
   depends_on = [google_project_service.services, 
                 time_sleep.wait_30_seconds,
-                google_service_networking_connection.private_vpc_connection]
+                google_service_networking_connection.private_vpc_connection
+                ]
 
 }
+
+# resource "google_sql_database_instance" "primary1" {
+#   name                = "postgres_backup"
+#   database_version    = var.gcp_pg_database_version
+#   region              = var.region
+#   deletion_protection = false
+
+#   settings {
+#     tier      = var.gcp_pg_tier
+#     disk_size = 10
+#     disk_type = "PD_SSD"
+#     ip_configuration {
+#       ipv4_enabled = false
+#       private_network = data.google_compute_network.vpc.id
+#     }
+#     database_flags {
+#       name  = "max_connections"
+#       value = "200"
+#     }
+#   }
+
+#   depends_on = [google_project_service.services, 
+#                 time_sleep.wait_30_seconds
+#                 ]
+
+# }
 
 resource "google_sql_user" "users" {
   name     = var.username

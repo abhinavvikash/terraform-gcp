@@ -37,6 +37,15 @@ vpc/.terraform.lock.hcl
 
 # audit.dockerfile
 
+ big_query/.terraform.lock.hcl
+ big_query/.terraform/
+ cloud_spanner/.terraform.lock.hcl
+ cloud_spanner/.terraform/
+ gcs_bucket/terraform.tfstate
+ gcs_bucket/terraform.tfstate.backup
+ infra_map/ 
+ prometheus.yml
+
 
 
 

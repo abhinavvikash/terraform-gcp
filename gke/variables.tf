@@ -6,22 +6,22 @@
 
 variable region {
     type = string
-    default = "europe-west1"
+    default = "europe-central2"
 }
 
 variable project_id {
     type = string
-    default = "playpen-795065"
+    default = "playpen-2f4e18"
 }
 
 variable vpc_name {
     type = string
-    default = "playpen-795065-vpc"
+    default = "playpen-2f4e18-vpc"
 }
 
 variable subnet_name {
     type = string
-    default = "playpen-795065-subnet-gke"
+    default = "playpen-2f4e18-subnet-gke"
 }
 
 variable machine_type {

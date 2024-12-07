@@ -1,6 +1,6 @@
 variable region {
     type = string
-    default = "europe-west1"
+    default = "europe-central2"
 }
 
 variable repository_name {
@@ -10,5 +10,5 @@ variable repository_name {
 
 variable project_id {
     type = string
-    default = "playpen-795065"
+    default = "playpen-2f4e18"
 }

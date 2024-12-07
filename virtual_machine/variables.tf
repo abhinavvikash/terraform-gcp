@@ -1,11 +1,11 @@
 variable vpc_name {
     type = string
-    default = "playpen-795065-vpc"
+    default = "playpen-2f4e18-vpc"
 }
 
 variable project_id {
     type = string
-    default = "playpen-795065"
+    default = "playpen-2f4e18"
 }
 
 variable vm_name {
@@ -15,7 +15,7 @@ variable vm_name {
 
 variable zone {
     type = string
-    default = "europe-west1-b"
+    default = "europe-central2-b"
 }
 
 variable machine_type {
@@ -25,10 +25,10 @@ variable machine_type {
 
 variable region {
     type = string
-    default = "europe-west1"
+    default = "europe-central2"
 }
 
 variable subnet_vm {
   type = string
-  default = "playpen-795065-subnet-dp"
+  default = "playpen-2f4e18-subnet-dp"
 }

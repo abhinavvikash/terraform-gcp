@@ -22,70 +22,8 @@ resource "google_project_iam_member" "dataproc_permissions" {
       role
     ]
   }
+  depends_on = [google_service_account.dataproc-svc]
 }
-
-# Artifact service account
-resource "google_service_account" "artifact_registry_sa" {
-  account_id   = "artifact-registry-sa"
-  display_name = "Artifact Registry Service Account"
-}
-
-resource "google_project_iam_binding" "artifact_registry_role" {
-  project = var.project_id
-  role    = "roles/artifactregistry.admin"
-
-  members = [
-    "serviceAccount:${google_service_account.artifact_registry_sa.email}"
-  ]
-  lifecycle {
-    ignore_changes = [
-      # List the attributes you want to ignore changes for
-      role
-    ]
-  }
-}
-
-resource "google_service_account" "gke_sa" {
-  account_id   = "gke-cluster-access"
-  display_name = "GKE Cluster access service account"
-}
-
-resource "google_project_iam_binding" "gke_role" {
-  for_each = toset([
-    "roles/container.clusterAdmin",
-    "roles/artifactregistry.reader",
-    "roles/cloudsql.admin",
-    "roles/storage.objectViewer"
-  ])
-  project = var.project_id
-  role    = each.key
-
-  members = [
-    "serviceAccount:${google_service_account.gke_sa.email}"
-  ]
-  lifecycle {
-    ignore_changes = [
-      # List the attributes you want to ignore changes for
-      role
-    ]
-  }
-}
-
-resource "google_service_account_iam_binding" "workload_identity_binding" {
-  # project = var.project_id
-  role    = "roles/iam.workloadIdentityUser"
-  service_account_id = google_service_account.gke_sa.name
-  members = [
-    "serviceAccount:${var.project_id}.svc.id.goog[default/foundation-component-service-account]"
-  ]
-  lifecycle {
-  ignore_changes = [
-    # List the attributes you want to ignore changes for
-    role
-  ]
-}
-}
-
 
 #VM service account
 resource "google_service_account" "vm_service_account" {
@@ -113,6 +51,7 @@ resource "google_project_iam_member" "vm_service_account_roles" {
     role
   ]
 }
+depends_on = [google_service_account.vm_service_account]
 }
 
 resource "google_service_account" "cloud_build" {

@@ -12,12 +12,12 @@ variable "gcp_pg_database_version" {
 
 variable "region" {
   type    = string
-  default = "europe-west1"
+  default = "europe-central2"
 }
 
 variable "zone" {
   type = string
-  default = "europe-west1-a"
+  default = "europe-central2-a"
 }
 
 variable "gcp_pg_tier" {
@@ -27,12 +27,12 @@ variable "gcp_pg_tier" {
 
 variable vpc_name {
     type = string
-    default = "playpen-795065-vpc"
+    default = "playpen-2f4e18-vpc"
 }
 
 variable project_id {
     type = string
-    default = "playpen-795065"
+    default = "playpen-2f4e18"
 }
 
 variable username {

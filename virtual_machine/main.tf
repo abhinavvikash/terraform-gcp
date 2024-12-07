@@ -1,7 +1,6 @@
-
-resource "google_compute_instance" "vm_instance" {
-  name         = var.vm_name
-  machine_type = var.machine_type
+resource "google_compute_instance" "test_vm_instance" {
+  name         = "foundation-component-1"
+  machine_type = "n1-standard-4"
   zone         = var.zone
 
   boot_disk {
@@ -20,7 +19,7 @@ resource "google_compute_instance" "vm_instance" {
 
   service_account {
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
-    email  = "vm-service-account@playpen-795065.iam.gserviceaccount.com"
+    email  = "vm-service-account@playpen-2f4e18.iam.gserviceaccount.com"
     scopes = [
         "https://www.googleapis.com/auth/compute",
         "https://www.googleapis.com/auth/cloud-platform",
@@ -41,7 +40,7 @@ NVM_INIT="$HOME/.nvm/nvm.sh"
 KAFKA_VERSION="3.8.0"
 KAFKA_DIR="/root/kafka_2.13-$KAFKA_VERSION"
 LOG_DIR="/root/foundation-components/logs"
-GS_BUCKET="gs://playpen-795065-lib-bucket"
+GS_BUCKET="gs://playpen-2f4e18-lib-bucket"
 
 # Create necessary directories
 sudo mkdir -p /root/foundation-components $LOG_DIR

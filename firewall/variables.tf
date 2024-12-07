@@ -1,6 +1,6 @@
 variable vpc_name {
     type = string
-    default = "playpen-795065-vpc"
+    default = "playpen-2f4e18-vpc"
 }
 
 variable source_ranges {
@@ -15,5 +15,5 @@ variable region {
 
 variable project_id {
     type = string
-    default = "playpen-795065"
+    default = "playpen-2f4e18"
 }
